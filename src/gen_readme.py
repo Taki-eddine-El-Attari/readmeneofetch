@@ -8,7 +8,8 @@ def generate_fetch(g:Github) -> str:
     with open("config.json", "r") as f:
         config = json.load(f)
 
-    pfp = generate_logo(g)
+    ascii_width = config.get("ascii_width", 100)
+    pfp = generate_logo(g, ascii_width)
 
     if config.get("logo_only", False):
         return pfp
@@ -76,7 +77,9 @@ def gen_image(g: Github):
 
     if logo_only:
         ascii_lines = fetch.split("\n")
-        width = 450
+        char_width = font.getlength("#")
+        max_line_len = max(len(line) for line in ascii_lines)
+        width = int(max_line_len * char_width) + 20
         height = len(ascii_lines) * line_spacing + 20
 
         image = Image.new("RGB", (width, height), bg_color)

@@ -6,6 +6,6 @@
     "append_automatic": false,
     "exclude_orgainzations": true,
     "logo_only": true,
-    "ascii_width": 100,
-    "font_size": 6
+    "ascii_width": 120,
+    "font_size": 12
 }

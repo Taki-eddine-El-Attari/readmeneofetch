@@ -1,11 +1,7 @@
 name: Update Neofetch Logo
 
 on:
-  schedule:
-    - cron: "45 3 * * *"
   workflow_dispatch:
-  push:
-    branches: [ main ]
 
 jobs:
   build:

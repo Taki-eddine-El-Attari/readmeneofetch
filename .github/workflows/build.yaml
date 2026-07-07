@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -34,5 +36,5 @@ jobs:
         git config --global user.email 'actions@github.com'
         git add out/fetch.png
         git diff --staged --quiet || git commit -m "Update neofetch logo"
-        git pull --rebase origin main
-        git push
+        git pull --rebase https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git main
+        git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git main

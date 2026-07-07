@@ -52,7 +52,7 @@ def gen_image(g: Github):
     logo_only = config.get("logo_only", False)
     bg_color = (0, 0, 0)
     value_color = return_preffered_color()
-    font_size = 16
+    font_size = config.get("font_size", 16)
 
     font = None
     font_paths = [

@@ -1,6 +1,6 @@
 import requests
 from github import Github
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageFilter
 from io import BytesIO
 
 ASCII_CHARS = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
@@ -14,8 +14,9 @@ def image_to_ascii(image, width=100) -> str:
     height = int(width * aspect_ratio * 0.5)
 
     image = image.resize((width, height))
-    image = image.convert('L')          # vraie luminosité, pas juste moyenne RGB
-    image = ImageOps.autocontrast(image)  # accentue le contraste
+    image = image.convert('L')
+    image = ImageOps.equalize(image)              # égalisation locale, fait ressortir les traits du visage
+    image = image.filter(ImageFilter.SHARPEN)       # accentue les contours (yeux, nez, bouche)
 
     ascii_str = ""
     for y in range(height):
